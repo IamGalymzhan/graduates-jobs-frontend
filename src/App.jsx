@@ -1,14 +1,16 @@
-import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/index";
 import { AuthProvider } from "./context/AuthContext";
-import AppRoutes from "./routes"; // Import your routing setup
-import "./index.css"; // Tailwind styles
+import "./index.css";
 
-const App = () => {
+function App() {
   return (
     <AuthProvider>
-      <AppRoutes />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </AuthProvider>
   );
-};
+}
 
 export default App;

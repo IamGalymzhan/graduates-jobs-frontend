@@ -2,17 +2,18 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let success = await login(username, password);
+    const formData = { email: email, password: password };
+    const success = await login(formData);
     if (success) {
-      navigate("/profile");
+      navigate("/");
     }
   };
 
@@ -25,11 +26,11 @@ const LoginPage = () => {
         <h2 className="text-xl font-bold mb-4">Login</h2>
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Email"
           className="w-full p-2 border rounded mb-2"
-          value={username}
+          value={email}
           autoComplete="username"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
@@ -50,4 +51,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

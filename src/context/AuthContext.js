@@ -1,39 +1,33 @@
 import { createContext, useState, useEffect } from "react";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-
-const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000/api";
+import { loginUser, fetchProfile } from "../services/api";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   useEffect(() => {
-    if (token) {
-      const decodedUser = jwtDecode(token);
-      setUser(decodedUser);
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
     }
-  }, [token]);
+  }, []);
 
-  const login = async (username, password) => {
+  const login = async (formData) => {
     try {
-      const response = await axios.post(`${API_URL}/users/login/`, { "username": username, "password": password });
-      localStorage.setItem("token", response.data.access);
-      setToken(response.data.access);
-      setUser(jwtDecode(response.data.access));
+      const response = await loginUser(formData);
+      setUser(response.data);
+      console.log("Login successful:", response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
       return true;
     } catch (error) {
-      console.error("Login failed:", error);
-      return false;
+      console.error("Login failed:", error.response?.data || error);
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
     setUser(null);
+    localStorage.removeItem("user");
   };
 
   return (
