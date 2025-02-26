@@ -1,15 +1,27 @@
 import { createContext, useState, useEffect } from "react";
 import { loginUser } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
+  const navigate = useNavigate();
+  
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const accessToken = localStorage.getItem('accessToken');
+    if(accessToken) {
+      console.log(accessToken);
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        console.log(JSON.parse(storedUser));
+        setUser(JSON.parse(storedUser));
+        navigate('/');
+      }
+    } else {
+      console.log('ml is work')
+      navigate('/login');
     }
   }, []);
 
@@ -28,6 +40,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   };
 
   return (

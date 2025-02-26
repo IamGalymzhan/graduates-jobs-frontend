@@ -10,12 +10,12 @@ const Navbar = () => {
     <nav className="bg-gray-800 text-white p-4">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <h1 className="text-xl font-bold">
-          {user.user.user_type === "student" && "Student Dashboard"}
-          {user.user.user_type === "employer" && "Employer Dashboard"}
-          {user.user.user_type === "admin" && "Admin Panel"}
+          {user.user_type === "student" && "Student Dashboard"}
+          {user.user_type === "employer" && "Employer Dashboard"}
+          {user.user_type === "admin" && "Admin Panel"}
         </h1>
         <div className="space-x-4">
-          {user.user.user_type === "student" && (
+          {user.user_type === "student" && (
             <>
               <Link to="/jobs" className="hover:underline">
                 Jobs
@@ -28,7 +28,7 @@ const Navbar = () => {
               </Link>
             </>
           )}
-          {user.user.user_type === "employer" && (
+          {user.user_type === "employer" && (
             <>
               <Link to="/employer/jobs" className="hover:underline">
                 My Jobs
@@ -41,7 +41,7 @@ const Navbar = () => {
               </Link>
             </>
           )}
-          {user.user.user_type === "admin" && (
+          {user.user_type === "admin" && (
             <>
               <Link to="/admin/users" className="hover:underline">
                 Manage Users

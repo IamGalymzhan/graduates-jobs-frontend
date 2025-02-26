@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { use, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Layout from "../components/Layout";
 import Landing from "../pages/Landing";
@@ -16,11 +16,11 @@ import EmployerProfileEdit from "../pages/profile/EmployerProfileEdit";
 
 const AppRoutes = () => {
   const { user } = useContext(AuthContext);
-
+ 
   return (
     <Routes>
       {/* Public Routes Without Navbar */}
-      {!user?.user && (
+      {!user && (
         <>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
@@ -31,21 +31,21 @@ const AppRoutes = () => {
 
       {/* Protected Routes With Navbar */}
       <Route element={<Layout />}>
-        {user?.user?.user_type === "student" && (
+        {user?.user_type === "student" && (
           <>
             <Route path="/" element={<StudentDashboard />} />
             <Route path="/profile" element={<StudentProfile />} />
             <Route path="/profile/edit" element={<StudentProfileEdit />} />
           </>
         )}
-        {user?.user?.user_type === "employer" && (
+        {user?.user_type === "employer" && (
           <>
             <Route path="/" element={<EmployerDashboard />} />
             <Route path="/profile" element={<EmployerProfile />} />
             <Route path="/profile/edit" element={<EmployerProfileEdit />} />
           </>
         )}
-        {user?.user?.user_type === "admin" && (
+        {user?.user_type === "admin" && (
           <Route path="/" element={<AdminDashboard />} />
         )}
       </Route>
