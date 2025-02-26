@@ -20,10 +20,38 @@ export const loginUser = async (formData) => {
   return await axios.post(`${API_URL}/users/login/`, formData);
 };
 
-export const fetchProfile = async (token) => {
-  return await axios.get(`${API_URL}/users/profile/`, {
-    headers: {
-      Authorization: `Token ${token}`,
-    },
-  });
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("accessToken");
+  if (!token) throw new Error("No authentication token found");
+
+  return {
+    Authorization: `Bearer ${token}`,
+  };
+};
+
+export const fetchProfile = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/users/profile/`, {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching profile:", error.response?.data || error);
+    throw error;
+  }
+};
+
+export const updateProfile = async (formData) => {
+  try {
+    const response = await axios.put(`${API_URL}/users/profile/`, formData, {
+      headers: {
+        ...getAuthHeaders(),
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating profile:", error.response?.data || error);
+    throw error;
+  }
 };

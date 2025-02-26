@@ -4,7 +4,7 @@ import { fetchProfile, updateProfile } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
 const StudentProfileEdit = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [profileData, setProfileData] = useState({
     full_name: "",
     education: "",
@@ -68,7 +68,6 @@ const StudentProfileEdit = () => {
     formData.append("full_name", profileData.full_name);
     formData.append("education", profileData.education);
     formData.append("status", profileData.status);
-    console.log(profileData.skills);
     profileData.skills.forEach((skill) =>
       formData.append("skills", parseInt(skill))
     );

@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { loginUser, fetchProfile } from "../services/api";
+import { loginUser } from "../services/api";
 
 export const AuthContext = createContext();
 
@@ -17,8 +17,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await loginUser(formData);
       setUser(response.data);
-      console.log("Login successful:", response.data);
-      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("accessToken", response.data.access);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       return true;
     } catch (error) {
       console.error("Login failed:", error.response?.data || error);
