@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getJobs } from "../../services/api";
 import DashboardNavbar from "../../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const StudentDashboard = () => {
   const [jobs, setJobs] = useState([]);
@@ -16,6 +17,7 @@ const StudentDashboard = () => {
     fetchJobs();
   }, [search, jobType, location]);
 
+  const navigate = useNavigate();
   return (
     <div>
       <DashboardNavbar />
@@ -61,7 +63,7 @@ const StudentDashboard = () => {
                 <p className="mt-2 text-sm text-gray-500">{job.requirements}</p>
                 <p className="mt-2 font-semibold">{job.salary}</p>
                 <p className="mt-2 text-blue-600">{job.location}</p>
-                <button className="mt-4 bg-green-500 text-white p-2 rounded w-full">Apply</button>
+                <button className="mt-4 bg-green-500 text-white p-2 rounded w-full" onClick={() => navigate(`/job/${job.id}`)}>Apply</button>
               </div>
             ))
           ) : (

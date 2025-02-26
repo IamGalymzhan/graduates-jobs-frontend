@@ -19,9 +19,6 @@ export const AuthProvider = ({ children }) => {
         setUser(JSON.parse(storedUser));
         navigate('/');
       }
-    } else {
-      console.log('ml is work')
-      navigate('/login');
     }
   }, []);
 

@@ -112,3 +112,61 @@ export const getUserProfile = async () => {
 };
 
 
+export const fetchStudents = async ({ ordering, page, search }) => {
+  try {
+    const queryParams = new URLSearchParams();
+    if (ordering) queryParams.append("ordering", ordering);
+    if (page) queryParams.append("page", page);
+    if (search) queryParams.append("search", search);
+
+    const response = await axios.get(`${API_URL}/users/students/?${queryParams.toString()}`, {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching students:", error.response?.data || error);
+    throw error;
+  }
+};
+
+
+export const postJob = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}/jobs/jobs/`, formData, {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error posting job:", error.response?.data || error);
+    throw error;
+  }
+};
+
+
+export const fetchJobDetails = async (jobId) => {
+  try {
+    const response = await axios.get(`${API_URL}/jobs/jobs/${jobId}/`, {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching job details:", error.response?.data || error);
+    throw error;
+  }
+};
+
+
+export const applyForJob = async (jobId, formData) => {
+  try {
+    const response = await axios.post(`${API_URL}/jobs/jobs/${jobId}/apply/`, formData, {
+      headers: {
+        ...getAuthHeaders(),
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error applying for job:", error.response?.data || error);
+    throw error;
+  }
+};
