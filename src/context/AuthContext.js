@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
       setUser(response.data);
       localStorage.setItem("accessToken", response.data.access);
       localStorage.setItem("user", JSON.stringify(response.data.user));
+      navigate('/');
       return true;
     } catch (error) {
       console.error("Login failed:", error.response?.data || error);

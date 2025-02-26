@@ -14,6 +14,8 @@ const Login = () => {
     const success = await login(formData);
     if (success) {
       navigate("/");
+    } else {
+      window.location.reload();
     }
   };
 
