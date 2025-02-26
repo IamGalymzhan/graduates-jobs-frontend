@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { fetchProfile, updateProfile } from "../services/api";
+import { AuthContext } from "../../context/AuthContext";
+import { fetchProfile, updateProfile } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
-const ProfilePage = () => {
-  const { user, logout } = useContext(AuthContext);
+const StudentProfileEdit = () => {
+  const { user } = useContext(AuthContext);
   const [profileData, setProfileData] = useState({
     full_name: "",
     education: "",
@@ -68,8 +68,9 @@ const ProfilePage = () => {
     formData.append("full_name", profileData.full_name);
     formData.append("education", profileData.education);
     formData.append("status", profileData.status);
-    console.log(profileData.skills);
-    profileData.skills.forEach(skill => formData.append("skills", parseInt(skill)));
+    profileData.skills.forEach((skill) =>
+      formData.append("skills", parseInt(skill))
+    );
     if (profileData.profile_picture instanceof File) {
       formData.append("profile_picture", profileData.profile_picture);
     }
@@ -159,4 +160,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default StudentProfileEdit;
