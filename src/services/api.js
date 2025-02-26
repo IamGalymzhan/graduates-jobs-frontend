@@ -156,6 +156,84 @@ export const fetchJobDetails = async (jobId) => {
 };
 
 
+export const fetchEmployerApplications = async ({ ordering, page, search }) => {
+  try {
+    const queryParams = new URLSearchParams();
+    if (ordering) queryParams.append("ordering", ordering);
+    if (page) queryParams.append("page", page);
+    if (search) queryParams.append("search", search);
+
+    const response = await axios.get(`${API_URL}/jobs/employer/applications/?${queryParams.toString()}`, {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching employer job applications:", error.response?.data || error);
+    throw error;
+  }
+};
+
+export const fetchSkills = async ({ search = "", page = 1, pageSize = 10 }) => {
+  try {
+    const queryParams = new URLSearchParams();
+    if (search) queryParams.append("search", search);
+    if (page) queryParams.append("page", page);
+    if (pageSize) queryParams.append("page_size", pageSize);
+
+    const response = await fetch(`${API_URL}/users/skills/?${queryParams.toString()}`, {
+      method: "GET",
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch skills.");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching skills:", error);
+    throw error;
+  }
+};
+
+export const addSkill = async (skillName) => {
+  try {
+    const response = await fetch(`${API_URL}/users/skills/`, {
+      method: "POST",
+       headers: getAuthHeaders(),
+      body: JSON.stringify({ name: skillName }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add skill.");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error adding skill:", error);
+    throw error;
+  }
+};
+
+
+export const fetchAppliedJobs = async ({ ordering, page, search }) => {
+  try {
+    const queryParams = new URLSearchParams();
+    if (ordering) queryParams.append("ordering", ordering);
+    if (page) queryParams.append("page", page);
+    if (search) queryParams.append("search", search);
+
+    const response = await axios.get(`${API_URL}/jobs/applications/?${queryParams.toString()}`, {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching applied jobs:", error.response?.data || error);
+    throw error;
+  }
+};
+
+
 export const applyForJob = async (jobId, formData) => {
   try {
     const response = await axios.post(`${API_URL}/jobs/jobs/${jobId}/apply/`, formData, {

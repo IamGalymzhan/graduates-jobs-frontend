@@ -82,8 +82,8 @@ const EmployerDashboard = () => {
                     <div className="mt-2">
                       <h4 className="font-semibold">Skills:</h4>
                       <ul className="list-disc pl-5 text-gray-700">
-                        {student.skills.map((skill, index) => (
-                          <li key={index}>{skill}</li>
+                        {student.skills.map((skill) => (
+                          <li key={skill.id}>{skill.name}</li>
                         ))}
                       </ul>
                     </div>

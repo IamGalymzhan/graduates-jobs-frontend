@@ -55,7 +55,7 @@ const Profile = () => {
         <h2 className="text-3xl font-bold text-gray-800">Profile</h2>
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-          onClick={() => setEditMode(!editMode)}
+          onClick={() => navigate('/profile/edit')}
         >
           {editMode ? "Cancel" : "Edit Profile"}
         </button>
@@ -110,9 +110,9 @@ const Profile = () => {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">Skills</h3>
             {profile.skills.length > 0 ? (
               <ul className="list-disc pl-6 text-gray-700">
-                {profile.skills.map((skill, index) => (
-                  <li key={index} className="bg-blue-100 text-blue-700 px-3 py-1 rounded-md inline-block m-1">
-                    {skill}
+                {profile.skills.map((skill) => (
+                  <li key={skill.id} className="bg-blue-100 text-blue-700 px-3 py-1 rounded-md inline-block m-1">
+                    {skill.name}
                   </li>
                 ))}
               </ul>

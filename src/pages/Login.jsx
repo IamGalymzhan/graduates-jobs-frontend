@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -8,14 +10,18 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { t } = useTranslation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = { email, password };
     const success = await login(formData);
     if (success) {
       navigate("/");
-    } else {
       window.location.reload();
+      toast.success(t('Login succesful'))
+    } else {
+      toast.error(t('Login NOT succesful'))
     }
   };
 

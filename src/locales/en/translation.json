@@ -1,6 +1,7 @@
 {
     "welcome": "Welcome to our Job Portal",
     "login": "Login",
-    "signup": "Sign Up"
+    "signup": "Sign Up",
+    "profile_updated_success": "Profile updated"
 }
   

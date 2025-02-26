@@ -1,6 +1,8 @@
 {
     "welcome": "Жұмыс порталына қош келдіңіз",
     "login": "Кіру",
-    "signup": "Тіркелу"
+    "signup": "Тіркелу",
+    "profile_updated_success": "Profile updated"
+
   }
   

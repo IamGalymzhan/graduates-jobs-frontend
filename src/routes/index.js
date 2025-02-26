@@ -15,6 +15,8 @@ import StudentProfileEdit from "../pages/profile/StudentProfileEdit";
 import EmployerProfileEdit from "../pages/profile/EmployerProfileEdit";
 import PostJob from "../pages/post/PostJob";
 import JobDetails from "../pages/jobs/JobDetail";
+import AppliedJobsList from "../pages/dashboard/AppliedJobs";
+import EmployerApplications from "../pages/dashboard/ReceivedJobs";
 
 const AppRoutes = () => {
   const { user } = useContext(AuthContext);
@@ -39,6 +41,8 @@ const AppRoutes = () => {
             <Route path="/profile" element={<StudentProfile />} />
             <Route path="/profile/edit" element={<StudentProfileEdit />} />
             <Route path="/job/:id" element={<JobDetails />} />
+            <Route path="/applications" element={<AppliedJobsList />} />
+            
 
           </>
         )}
@@ -49,6 +53,7 @@ const AppRoutes = () => {
             <Route path="/profile/edit" element={<EmployerProfileEdit />} />
             <Route path="/post-job" element={<PostJob />} />
             <Route path="/job/:id" element={<JobDetails />} />
+            <Route path="/applications" element={<EmployerApplications />} />
           </>
         )}
         {user?.user_type === "admin" && (

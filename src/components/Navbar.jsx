@@ -35,7 +35,7 @@ const Navbar = () => {
               <Link to="/employer/jobs" className="hover:underline">
                 My Jobs
               </Link>
-              <Link to="/employer/applicants" className="hover:underline">
+              <Link to="/applications" className="hover:underline">
                 Applicants
               </Link>
               <Link to="/profile" className="hover:underline">

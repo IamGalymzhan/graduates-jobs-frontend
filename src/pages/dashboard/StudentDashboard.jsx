@@ -23,7 +23,7 @@ const StudentDashboard = () => {
       <DashboardNavbar />
       <div className="max-w-6xl mx-auto p-6">
         <h2 className="text-3xl font-bold mb-6">Find Your Dream Job</h2>
-        
+
         {/* Filters */}
         <div className="flex flex-wrap gap-4 mb-6">
           <input
@@ -50,7 +50,9 @@ const StudentDashboard = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
-          <button className="p-3 bg-blue-600 text-white rounded w-full md:w-1/6">Search</button>
+          <button className="p-3 bg-blue-600 text-white rounded w-full md:w-1/6">
+            Search
+          </button>
         </div>
 
         {/* Job Cards */}
@@ -63,7 +65,30 @@ const StudentDashboard = () => {
                 <p className="mt-2 text-sm text-gray-500">{job.requirements}</p>
                 <p className="mt-2 font-semibold">{job.salary}</p>
                 <p className="mt-2 text-blue-600">{job.location}</p>
-                <button className="mt-4 bg-green-500 text-white p-2 rounded w-full" onClick={() => navigate(`/job/${job.id}`)}>Apply</button>
+                <div className="flex flex-col gap-2">
+                  <label className="block font-medium">Required Skills:</label>
+                  <div className="flex flex-wrap gap-2">
+                    {job.skills.length > 0 ? (
+                      job.skills.map((skill) => (
+                        <span
+                          key={skill.id}
+                          className="bg-blue-500 text-white px-3 py-1 rounded-full flex items-center"
+                        >
+                          {skill.name}
+                        </span>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">No skills added</p>
+                    )}
+                  </div>
+                </div>
+
+                <button
+                  className="mt-4 bg-green-500 text-white p-2 rounded w-full"
+                  onClick={() => navigate(`/job/${job.id}`)}
+                >
+                  Apply
+                </button>
               </div>
             ))
           ) : (
