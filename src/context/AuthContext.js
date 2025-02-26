@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000/api";
+const API_URL = process.env.REACT_APP_API_URL || "http://192.168.0.140:8000/api";
 
 export const AuthContext = createContext();
 
