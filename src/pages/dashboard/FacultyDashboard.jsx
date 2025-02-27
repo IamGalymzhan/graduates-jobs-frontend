@@ -14,6 +14,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import MapComponent from "../../components/MapComponent";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
@@ -101,6 +102,10 @@ const FacultyDashboard = () => {
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>
+
+      {/* Карта */}
+      <h2 className="text-xl font-bold mt-6">Студенттердің картасы</h2>
+      <MapComponent />
     </div>
   );
 };
