@@ -18,7 +18,7 @@ const JobDetails = () => {
         const data = await fetchJobDetails(id);
         setJob(data);
       } catch (error) {
-        setError("Failed to load job details");
+        setError("Жұмыс мәліметтерін жүктеу сәтсіз аяқталды");
       } finally {
         setLoading(false);
       }
@@ -38,15 +38,20 @@ const JobDetails = () => {
 
     try {
       await applyForJob(id, formData);
-      setSuccess("Application submitted successfully!");
+      setSuccess("Өтініш сәтті жіберілді!");
     } catch (error) {
-      setError("Failed to submit application. Try again.");
+      setError("Өтінішті жіберу сәтсіз аяқталды. Қайталап көріңіз.");
     } finally {
       setApplying(false);
     }
   };
 
-  if (loading) return <p className="text-center text-xl font-semibold">Loading job details...</p>;
+  if (loading)
+    return (
+      <p className="text-center text-xl font-semibold">
+        Жұмыс мәліметтері жүктелуде...
+      </p>
+    );
   if (error) return <p className="text-center text-red-500 text-lg">{error}</p>;
 
   return (
@@ -54,22 +59,24 @@ const JobDetails = () => {
       <h2 className="text-3xl font-bold mb-6 text-gray-800">{job.title}</h2>
       <p className="text-lg text-gray-700 mb-4">{job.description}</p>
       <div className="mb-4">
-        <h3 className="font-semibold">Requirements:</h3>
+        <h3 className="font-semibold">Талаптар:</h3>
         <p className="text-gray-700">{job.requirements}</p>
       </div>
-      <p className="text-lg font-semibold text-gray-800">Salary: {job.salary}</p>
-      <p className="text-lg text-gray-700">Location: {job.location}</p>
-      <p className="text-lg text-gray-700">Type: {job.job_type}</p>
-      
-      {/* Application Form */}
+      <p className="text-lg font-semibold text-gray-800">
+        Жалақы: {job.salary}
+      </p>
+      <p className="text-lg text-gray-700">Орналасқан жері: {job.location}</p>
+      <p className="text-lg text-gray-700">Түрі: {job.job_type}</p>
+
+      {/* Өтініш беру формасы */}
       <div className="mt-8 p-6 bg-gray-50 border rounded-lg">
-        <h3 className="text-2xl font-semibold mb-4">Apply for this Job</h3>
+        <h3 className="text-2xl font-semibold mb-4">Осы жұмысқа өтініш беру</h3>
         {success && <p className="text-green-600 text-lg">{success}</p>}
         {error && <p className="text-red-600 text-lg">{error}</p>}
         <form onSubmit={handleApply} className="space-y-4">
           <textarea
             className="w-full p-3 border rounded shadow-md focus:ring-2 focus:ring-blue-500"
-            placeholder="Write your cover letter here..."
+            placeholder="Мотивациялық хатыңызды осында жазыңыз..."
             value={coverLetter}
             onChange={(e) => setCoverLetter(e.target.value)}
             required
@@ -85,7 +92,7 @@ const JobDetails = () => {
             className="w-full p-3 bg-blue-600 text-white rounded shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105"
             disabled={applying}
           >
-            {applying ? "Submitting..." : "Apply Now"}
+            {applying ? "Жіберілуде..." : "Қазір өтініш беру"}
           </button>
         </form>
       </div>

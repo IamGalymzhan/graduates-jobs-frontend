@@ -22,23 +22,23 @@ const EmployerRegister = () => {
     e.preventDefault();
     try {
       await registerEmployer(formData);
-      alert("Registration successful! Please log in.");
+      alert("Тіркелу сәтті аяқталды! Кіруіңізді сұраймыз.");
       navigate("/login");
     } catch (error) {
-      console.error("Registration failed:", error.response?.data || error);
+      console.error("Тіркелу сәтсіз аяқталды:", error.response?.data || error);
     }
   };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold text-center mb-4">
-        Employer Registration
+        Жұмыс берушіні тіркеу
       </h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="full_name"
-          placeholder="Full Name"
+          placeholder="Толық аты-жөніңіз"
           value={formData.full_name}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -46,7 +46,7 @@ const EmployerRegister = () => {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Электрондық пошта"
           value={formData.email}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -54,7 +54,7 @@ const EmployerRegister = () => {
         <input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Құпия сөз"
           value={formData.password}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -62,7 +62,7 @@ const EmployerRegister = () => {
         <input
           type="text"
           name="company_name"
-          placeholder="Company Name"
+          placeholder="Компания атауы"
           value={formData.company_name}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -70,14 +70,14 @@ const EmployerRegister = () => {
         <input
           type="url"
           name="company_website"
-          placeholder="Company Website"
+          placeholder="Компания сайты"
           value={formData.company_website}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
         />
         <textarea
           name="company_description"
-          placeholder="Company Description"
+          placeholder="Компания сипаттамасы"
           value={formData.company_description}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -86,7 +86,7 @@ const EmployerRegister = () => {
           type="submit"
           className="w-full bg-green-500 text-white p-2 rounded"
         >
-          Register
+          Тіркелу
         </button>
       </form>
     </div>

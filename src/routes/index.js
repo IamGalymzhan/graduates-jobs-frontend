@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { use, useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Layout from "../components/Layout";
 import Landing from "../pages/Landing";
@@ -8,7 +8,7 @@ import StudentRegister from "../pages/register/StudentRegister";
 import EmployerRegister from "../pages/register/EmployerRegister";
 import StudentDashboard from "../pages/dashboard/StudentDashboard";
 import EmployerDashboard from "../pages/dashboard/EmployerDashboard";
-import AdminDashboard from "../pages/dashboard/AdminDashboard";
+import FacultyDashboard from "../pages/dashboard/FacultyDashboard";
 import StudentProfile from "../pages/profile/StudentProfile";
 import EmployerProfile from "../pages/profile/EmployerProfile";
 import StudentProfileEdit from "../pages/profile/StudentProfileEdit";
@@ -17,10 +17,11 @@ import PostJob from "../pages/post/PostJob";
 import JobDetails from "../pages/jobs/JobDetail";
 import AppliedJobsList from "../pages/dashboard/AppliedJobs";
 import EmployerApplications from "../pages/dashboard/ReceivedJobs";
+import ManageApplications from "../pages/admin/ManageApplications";
 
 const AppRoutes = () => {
   const { user } = useContext(AuthContext);
- 
+
   return (
     <Routes>
       {/* Public Routes Without Navbar */}
@@ -42,8 +43,6 @@ const AppRoutes = () => {
             <Route path="/profile/edit" element={<StudentProfileEdit />} />
             <Route path="/job/:id" element={<JobDetails />} />
             <Route path="/applications" element={<AppliedJobsList />} />
-            
-
           </>
         )}
         {user?.user_type === "employer" && (
@@ -56,8 +55,13 @@ const AppRoutes = () => {
             <Route path="/applications" element={<EmployerApplications />} />
           </>
         )}
-        {user?.user_type === "admin" && (
-          <Route path="/" element={<AdminDashboard />} />
+        {(user?.user_type === "admin" || user?.user_type === "faculty") && (
+          <>
+            <Route path="/" element={<FacultyDashboard />} />
+            <Route path="/students" element={<EmployerDashboard />} />
+            <Route path="/applications" element={<ManageApplications />} />
+            <Route path="/jobs" element={<StudentDashboard />} />
+          </>
         )}
       </Route>
 

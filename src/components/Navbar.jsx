@@ -11,45 +11,52 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-800 text-white p-4">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
-        <h1 className="text-xl font-bold cursor-pointer" onClick={() => navigate('/')}>
-          {user.user_type === "student" && "Student Dashboard"}
-          {user.user_type === "employer" && "Employer Dashboard"}
-          {user.user_type === "admin" && "Admin Panel"}
+        <h1
+          className="text-xl font-bold cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          {user.user_type === "student" && "Студенттік панель"}
+          {user.user_type === "employer" && "Жұмыс беруші панелі"}
+          {(user.user_type === "admin" || user.user_type === "faculty") &&
+            "Әкімшілік панелі"}
         </h1>
         <div className="space-x-4">
           {user.user_type === "student" && (
             <>
               <Link to="/jobs" className="hover:underline">
-                Jobs
+                Жұмыстар
               </Link>
               <Link to="/applications" className="hover:underline">
-                My Applications
+                Менің өтінімдерім
               </Link>
               <Link to="/profile" className="hover:underline">
-                Profile
+                Профиль
               </Link>
             </>
           )}
           {user.user_type === "employer" && (
             <>
               <Link to="/employer/jobs" className="hover:underline">
-                My Jobs
+                Менің жұмыстарым
               </Link>
               <Link to="/applications" className="hover:underline">
-                Applicants
+                Үміткерлер
               </Link>
               <Link to="/profile" className="hover:underline">
-                Profile
+                Профиль
               </Link>
             </>
           )}
-          {user.user_type === "admin" && (
+          {(user.user_type === "admin" || user.user_type === "faculty") && (
             <>
-              <Link to="/admin/users" className="hover:underline">
-                Manage Users
+              <Link to="/students" className="hover:underline">
+                Студенттерді басқару
               </Link>
-              <Link to="/admin/jobs" className="hover:underline">
-                Manage Jobs
+              <Link to="/applications" className="hover:underline">
+                Өтінімдерді басқару
+              </Link>
+              <Link to="/jobs" className="hover:underline">
+                Жұмыстарды басқару
               </Link>
             </>
           )}
@@ -60,7 +67,7 @@ const Navbar = () => {
             }}
             className="bg-red-500 px-3 py-1 rounded"
           >
-            Logout
+            Шығу
           </button>
         </div>
       </div>

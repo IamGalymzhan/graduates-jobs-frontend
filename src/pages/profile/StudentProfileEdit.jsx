@@ -1,6 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { fetchProfile, updateProfile, fetchSkills, addSkill } from "../../services/api";
+import {
+  fetchProfile,
+  updateProfile,
+  fetchSkills,
+  addSkill,
+} from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
@@ -36,7 +41,7 @@ const StudentProfileEdit = () => {
           });
           setLoading(false);
         })
-        .catch((error) => console.error("Error fetching profile:", error));
+        .catch((error) => console.error("Профильді жүктеу қатесі:", error));
     }
   }, [user, navigate]);
 
@@ -60,7 +65,10 @@ const StudentProfileEdit = () => {
 
   const handleAddSkill = async (skill) => {
     if (!profileData.skills.find((s) => s.name === skill.name)) {
-      setProfileData({ ...profileData, skills: [...profileData.skills, skill] });
+      setProfileData({
+        ...profileData,
+        skills: [...profileData.skills, skill],
+      });
     }
   };
 
@@ -70,7 +78,7 @@ const StudentProfileEdit = () => {
       skills: profileData.skills.filter((skill) => skill.id !== skillId),
     });
   };
-  
+
   const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
@@ -89,18 +97,18 @@ const StudentProfileEdit = () => {
     }
 
     await updateProfile(formData);
-    toast.success(t('profile_updated_success'), {})
+    toast.success(t("профиль сәтті жаңартылды"), {});
   };
 
-  if (loading) return <p>Loading profile...</p>;
+  if (loading) return <p>Профиль жүктелуде...</p>;
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold mb-4">Edit Profile</h1>
+      <h1 className="text-2xl font-bold mb-4">Профильді өзгерту</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Full Name */}
         <div>
-          <label className="block font-medium">Full Name:</label>
+          <label className="block font-medium">Толық аты:</label>
           <input
             type="text"
             name="full_name"
@@ -112,7 +120,7 @@ const StudentProfileEdit = () => {
 
         {/* Education */}
         <div>
-          <label className="block font-medium">Education:</label>
+          <label className="block font-medium">Білімі:</label>
           <input
             type="text"
             name="education"
@@ -124,22 +132,22 @@ const StudentProfileEdit = () => {
 
         {/* Status */}
         <div>
-          <label className="block font-medium">Status:</label>
+          <label className="block font-medium">Күйі:</label>
           <select
             name="status"
             value={profileData.status}
             onChange={handleChange}
             className="w-full p-2 border rounded"
           >
-            <option value="searching">Searching for Job</option>
-            <option value="working">Currently Working</option>
-            <option value="internship">Internship</option>
+            <option value="searching">Жұмыс іздеуде</option>
+            <option value="working">Қазіргі уақытта жұмыс істейді</option>
+            <option value="internship">Тәжірибеде</option>
           </select>
         </div>
 
         {/* Existing Skills */}
         <div>
-          <label className="block font-medium">Your Skills:</label>
+          <label className="block font-medium">Сіздің дағдыларыңыз:</label>
           <div className="flex flex-wrap gap-2">
             {profileData.skills.length > 0 ? (
               profileData.skills.map((skill) => (
@@ -158,51 +166,29 @@ const StudentProfileEdit = () => {
                 </span>
               ))
             ) : (
-              <p className="text-gray-500">No skills added</p>
+              <p className="text-gray-500">Дағдылар қосылмаған</p>
             )}
           </div>
         </div>
 
         {/* Add New Skill */}
         <div>
-          <label className="block font-medium">Add Skills:</label>
+          <label className="block font-medium">Дағдыларды қосу:</label>
           <input
             type="text"
-            placeholder="Search for skills..."
+            placeholder="Дағдыларды іздеу..."
             className="w-full p-2 border rounded"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          {availableSkills.length > 0 && (
-            <ul className="bg-white border rounded mt-1 max-h-40 overflow-y-auto">
-              {availableSkills.map((skill) => (
-                <li
-                  key={skill.id}
-                  className="p-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleAddSkill(skill)}
-                >
-                  {skill.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {/* Profile Picture */}
-        <div>
-          <label className="block font-medium">Profile Picture:</label>
-          <input type="file" name="profile_picture" onChange={handleFileChange} className="w-full p-2 border rounded" />
-        </div>
-
-        {/* Resume Upload */}
-        <div>
-          <label className="block font-medium">Resume (PDF):</label>
-          <input type="file" name="resume" onChange={handleFileChange} className="w-full p-2 border rounded" />
         </div>
 
         {/* Submit */}
-        <button type="submit" className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700">
-          Update Profile
+        <button
+          type="submit"
+          className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
+        >
+          Профильді жаңарту
         </button>
       </form>
     </div>

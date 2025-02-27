@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://192.168.0.140:8000/api";
+const API_URL =
+  process.env.REACT_APP_API_URL || "http://192.168.0.140:8000/api";
 
 export const registerStudent = async (formData) => {
   return await axios.post(`${API_URL}/users/register/`, {
@@ -56,7 +57,6 @@ export const updateProfile = async (formData) => {
   }
 };
 
-
 export const getJobs = async ({ search, jobType, location }) => {
   try {
     const queryParams = new URLSearchParams();
@@ -64,7 +64,9 @@ export const getJobs = async ({ search, jobType, location }) => {
     if (jobType !== "all") queryParams.append("job_type", jobType);
     if (location) queryParams.append("location", location);
 
-    const response = await fetch(`${API_URL}/jobs/jobs?${queryParams.toString()}`);
+    const response = await fetch(
+      `${API_URL}/jobs/jobs?${queryParams.toString()}`
+    );
     const data = await response.json();
     return data.results || [];
   } catch (error) {
@@ -73,12 +75,10 @@ export const getJobs = async ({ search, jobType, location }) => {
   }
 };
 
-
-
 export const getUserProfile = async () => {
   const accessToken = localStorage.getItem("accessToken");
   if (!accessToken) {
-    window.location.href = '/login';
+    window.location.href = "/login";
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     throw new Error("No access token found. Redirecting to login.");
@@ -88,29 +88,28 @@ export const getUserProfile = async () => {
     const response = await fetch(`${API_URL}/users/profile/`, {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
-      }
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     });
 
     if (!response.ok) {
-      window.location.href = '/login';
+      window.location.href = "/login";
       localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+      localStorage.removeItem("refreshToken");
       throw new Error("Failed to fetch profile data. Redirecting to login.");
     }
 
     return await response.json();
   } catch (error) {
     console.error("Error fetching user profile:", error);
-    window.location.href = '/login';
+    window.location.href = "/login";
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
 
     throw error;
   }
 };
-
 
 export const fetchStudents = async ({ ordering, page, search }) => {
   try {
@@ -119,16 +118,18 @@ export const fetchStudents = async ({ ordering, page, search }) => {
     if (page) queryParams.append("page", page);
     if (search) queryParams.append("search", search);
 
-    const response = await axios.get(`${API_URL}/users/students/?${queryParams.toString()}`, {
-      headers: getAuthHeaders(),
-    });
+    const response = await axios.get(
+      `${API_URL}/users/students/?${queryParams.toString()}`,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching students:", error.response?.data || error);
     throw error;
   }
 };
-
 
 export const postJob = async (formData) => {
   try {
@@ -142,7 +143,6 @@ export const postJob = async (formData) => {
   }
 };
 
-
 export const fetchJobDetails = async (jobId) => {
   try {
     const response = await axios.get(`${API_URL}/jobs/jobs/${jobId}/`, {
@@ -155,7 +155,6 @@ export const fetchJobDetails = async (jobId) => {
   }
 };
 
-
 export const fetchEmployerApplications = async ({ ordering, page, search }) => {
   try {
     const queryParams = new URLSearchParams();
@@ -163,12 +162,18 @@ export const fetchEmployerApplications = async ({ ordering, page, search }) => {
     if (page) queryParams.append("page", page);
     if (search) queryParams.append("search", search);
 
-    const response = await axios.get(`${API_URL}/jobs/employer/applications/?${queryParams.toString()}`, {
-      headers: getAuthHeaders(),
-    });
+    const response = await axios.get(
+      `${API_URL}/jobs/employer/applications/?${queryParams.toString()}`,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error("Error fetching employer job applications:", error.response?.data || error);
+    console.error(
+      "Error fetching employer job applications:",
+      error.response?.data || error
+    );
     throw error;
   }
 };
@@ -180,10 +185,13 @@ export const fetchSkills = async ({ search = "", page = 1, pageSize = 10 }) => {
     if (page) queryParams.append("page", page);
     if (pageSize) queryParams.append("page_size", pageSize);
 
-    const response = await fetch(`${API_URL}/users/skills/?${queryParams.toString()}`, {
-      method: "GET",
-      headers: getAuthHeaders(),
-    });
+    const response = await fetch(
+      `${API_URL}/users/skills/?${queryParams.toString()}`,
+      {
+        method: "GET",
+        headers: getAuthHeaders(),
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to fetch skills.");
@@ -200,7 +208,7 @@ export const addSkill = async (skillName) => {
   try {
     const response = await fetch(`${API_URL}/users/skills/`, {
       method: "POST",
-       headers: getAuthHeaders(),
+      headers: getAuthHeaders(),
       body: JSON.stringify({ name: skillName }),
     });
 
@@ -215,7 +223,6 @@ export const addSkill = async (skillName) => {
   }
 };
 
-
 export const fetchAppliedJobs = async ({ ordering, page, search }) => {
   try {
     const queryParams = new URLSearchParams();
@@ -223,28 +230,76 @@ export const fetchAppliedJobs = async ({ ordering, page, search }) => {
     if (page) queryParams.append("page", page);
     if (search) queryParams.append("search", search);
 
-    const response = await axios.get(`${API_URL}/jobs/applications/?${queryParams.toString()}`, {
-      headers: getAuthHeaders(),
-    });
+    const response = await axios.get(
+      `${API_URL}/jobs/applications/?${queryParams.toString()}`,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error("Error fetching applied jobs:", error.response?.data || error);
+    console.error(
+      "Error fetching applied jobs:",
+      error.response?.data || error
+    );
     throw error;
   }
 };
 
-
 export const applyForJob = async (jobId, formData) => {
   try {
-    const response = await axios.post(`${API_URL}/jobs/jobs/${jobId}/apply/`, formData, {
-      headers: {
-        ...getAuthHeaders(),
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await axios.post(
+      `${API_URL}/jobs/jobs/${jobId}/apply/`,
+      formData,
+      {
+        headers: {
+          ...getAuthHeaders(),
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error applying for job:", error.response?.data || error);
     throw error;
   }
 };
+
+export const fetchAllApplications = async ({ ordering, page, search }) => {
+  try {
+    const queryParams = new URLSearchParams();
+    if (ordering) queryParams.append("ordering", ordering);
+    if (page) queryParams.append("page", page);
+    if (search) queryParams.append("search", search);
+
+    const response = await axios.get(
+      `${API_URL}/faculty/applications/?${queryParams.toString()}`,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error fetching all applications:",
+      error.response?.data || error
+    );
+    throw error;
+  }
+};
+
+export const fetchFacultyStats = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/faculty/stats/`, {
+      headers: getAuthHeaders(),
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error fetching faculty stats:",
+      error.response?.data || error
+    );
+    throw error;
+  }
+};
+

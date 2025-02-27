@@ -21,23 +21,21 @@ const StudentRegister = () => {
     e.preventDefault();
     try {
       await registerStudent(formData);
-      alert("Registration successful! Please log in.");
+      alert("Тіркелу сәтті аяқталды! Кіруіңізді сұраймыз.");
       navigate("/login");
     } catch (error) {
-      console.error("Registration failed:", error.response?.data || error);
+      console.error("Тіркелу сәтсіз аяқталды:", error.response?.data || error);
     }
   };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold text-center mb-4">
-        Student Registration
-      </h2>
+      <h2 className="text-2xl font-bold text-center mb-4">Студентті тіркеу</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="full_name"
-          placeholder="Full Name"
+          placeholder="Толық аты-жөніңіз"
           value={formData.full_name}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -45,7 +43,7 @@ const StudentRegister = () => {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Электрондық пошта"
           value={formData.email}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -53,7 +51,7 @@ const StudentRegister = () => {
         <input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Құпия сөз"
           value={formData.password}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -61,7 +59,7 @@ const StudentRegister = () => {
         <input
           type="text"
           name="education"
-          placeholder="Education"
+          placeholder="Білімі"
           value={formData.education}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
@@ -72,15 +70,15 @@ const StudentRegister = () => {
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
         >
-          <option value="searching">Searching for Job</option>
-          <option value="working">Currently Working</option>
-          <option value="internship">Internship</option>
+          <option value="searching">Жұмыс іздеуде</option>
+          <option value="working">Жұмыс істеп жүр</option>
+          <option value="internship">Тәжірибеде</option>
         </select>
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded"
         >
-          Register
+          Тіркелу
         </button>
       </form>
     </div>

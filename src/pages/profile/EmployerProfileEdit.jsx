@@ -35,7 +35,7 @@ const EmployerProfileEdit = () => {
 
   return (
     <div className="max-w-lg mx-auto p-6">
-      <h2 className="text-2xl font-bold">Edit Employer Profile</h2>
+      <h2 className="text-2xl font-bold">Жұмыс берушінің профилін өңдеу</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -43,6 +43,7 @@ const EmployerProfileEdit = () => {
           value={formData.full_name}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
+          placeholder="Толық аты-жөніңіз"
         />
         <input
           type="text"
@@ -50,6 +51,7 @@ const EmployerProfileEdit = () => {
           value={formData.company_name}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
+          placeholder="Компания атауы"
         />
         <input
           type="text"
@@ -57,18 +59,20 @@ const EmployerProfileEdit = () => {
           value={formData.company_website}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
+          placeholder="Компания сайты"
         />
         <textarea
           name="company_description"
           value={formData.company_description}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
+          placeholder="Компания сипаттамасы"
         ></textarea>
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
-          Save
+          Сақтау
         </button>
       </form>
     </div>

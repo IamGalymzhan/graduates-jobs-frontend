@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const phrases = [
-  "Your Dream Job Awaits",
-  "Find Your Perfect Career",
-  "Connecting Talent with Opportunity",
-  "Unlock Your Potential Today"
+  "Армандаған жұмысыңыз сізді күтуде",
+  "Өзіңізге лайықты мансап табыңыз",
+  "Талант пен мүмкіндікті байланыстыру",
+  "Бүгін өз әлеуетіңізді ашыңыз",
 ];
 
 const Landing = () => {
@@ -39,7 +39,10 @@ const Landing = () => {
   return (
     <div
       className="h-screen flex flex-col items-center justify-center bg-cover bg-center text-white"
-      style={{ backgroundImage: "url('https://www.cardiff.ac.uk/__data/assets/image/0010/1191970/Graduation-2018-2018-5-29-10-3-51-566.jpeg')" }}
+      style={{
+        backgroundImage:
+          "url('https://www.cardiff.ac.uk/__data/assets/image/0010/1191970/Graduation-2018-2018-5-29-10-3-51-566.jpeg')",
+      }}
     >
       <div className="bg-black bg-opacity-50 p-8 rounded-lg text-center shadow-lg">
         <h1 className="text-5xl font-extrabold mb-6 drop-shadow-md">
@@ -47,39 +50,40 @@ const Landing = () => {
           <span className="blink">|</span>
         </h1>
         <p className="text-lg mb-6 max-w-xl mx-auto">
-          Discover amazing job opportunities or find top talent to grow your business.
+          Керемет жұмыс мүмкіндіктерін табыңыз немесе бизнесіңізді дамыту үшін
+          үздік таланттарды іздеңіз.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             to="/login"
             className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md transition-all"
           >
-            Login
+            Кіру
           </Link>
           <Link
             to="/register/student"
             className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow-md transition-all"
           >
-            Register as Student
+            Студент ретінде тіркелу
           </Link>
           <Link
             to="/register/employer"
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg shadow-md transition-all"
           >
-            Register as Employer
+            Жұмыс беруші ретінде тіркелу
           </Link>
         </div>
         <div className="mt-6 w-full max-w-md mx-auto">
           <input
             type="text"
-            placeholder="Enter your email as a graduate or employer"
+            placeholder="Электрондық поштаңызды енгізіңіз"
             className="w-full p-3 rounded-lg text-black outline-none"
           />
           <Link
             to="/login"
             className="mt-4 block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md transition-all text-center"
           >
-            Get notified
+            Хабарландыру алу
           </Link>
         </div>
       </div>

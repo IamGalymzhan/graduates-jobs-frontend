@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 const Layout = () => {
   const location = useLocation();
   const hiddenRoutes = [
-    "/",
+    //"/",
     "/login",
     "/register/student",
     "/register/employer",

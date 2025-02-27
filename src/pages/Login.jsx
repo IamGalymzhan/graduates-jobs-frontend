@@ -19,29 +19,34 @@ const Login = () => {
     if (success) {
       navigate("/");
       window.location.reload();
-      toast.success(t('Login succesful'))
+      toast.success(t("Кіру сәтті өтті"));
     } else {
-      toast.error(t('Login NOT succesful'))
+      toast.error(t("Кіру сәтсіз болды"));
     }
   };
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      {/* Left side: Image with Motivational Text */}
+      {/* Сол жақ бөлік: Кескін және мотивациялық мәтін */}
       <div
         className="hidden md:flex md:w-1/2 bg-cover bg-center relative items-center justify-center text-white text-center p-6"
-        style={{ backgroundImage: "url('https://www.cardiff.ac.uk/__data/assets/image/0010/1191970/Graduation-2018-2018-5-29-10-3-51-566.jpeg')" }}
+        style={{
+          backgroundImage:
+            "url('https://www.cardiff.ac.uk/__data/assets/image/0010/1191970/Graduation-2018-2018-5-29-10-3-51-566.jpeg')",
+        }}
       >
         <div className="bg-black bg-opacity-50 p-6 rounded-lg">
-          <h1 className="text-3xl font-bold">Unlock Your Career Potential</h1>
-          <p className="text-lg mt-2">Join thousands of professionals finding their dream jobs today.</p>
+          <h1 className="text-3xl font-bold">Карьера мүмкіндіктерін ашыңыз</h1>
+          <p className="text-lg mt-2">
+            Армандаған жұмысыңызды тапқан мыңдаған кәсіпқойларға қосылыңыз.
+          </p>
         </div>
       </div>
 
-      {/* Right side: Login form */}
+      {/* Оң жақ бөлік: Кіру формасы */}
       <div className="flex justify-center items-center w-full md:w-1/2 p-6 bg-gray-100">
         <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-4">Login</h2>
+          <h2 className="text-2xl font-bold mb-4">Кіру</h2>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -53,7 +58,7 @@ const Login = () => {
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Құпия сөз"
               className="w-full p-3 border rounded mb-4"
               value={password}
               autoComplete="current-password"
@@ -63,16 +68,16 @@ const Login = () => {
               type="submit"
               className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600 transition"
             >
-              Login
+              Кіру
             </button>
           </form>
           <p className="mt-4 text-center text-sm">
-            Don't have an account? 
+            Аккаунтыңыз жоқ па?{" "}
             <span
               className="text-blue-500 cursor-pointer hover:underline"
               onClick={() => navigate("/")}
             >
-              Go to Homepage
+              Басты бетке өту
             </span>
           </p>
         </div>
