@@ -3,13 +3,13 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import img from "../assets/google.png";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
@@ -23,6 +23,11 @@ const Login = () => {
     } else {
       toast.error(t("Кіру сәтсіз болды"));
     }
+  };
+
+  // 🔹 Function to handle Google login redirect
+  const handleGoogleLogin = () => {
+    window.location.href = "http://127.0.0.1:8000/api/users/auth/google/login/";
   };
 
   return (
@@ -71,6 +76,16 @@ const Login = () => {
               Кіру
             </button>
           </form>
+
+          {/* 🔹 Google Login Button */}
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full mt-3 bg-red-500 text-white p-3 rounded flex items-center justify-center hover:bg-red-600 transition"
+          >
+            <img src={img} alt="G" className="w-5 h-5 mr-2" />
+            Google арқылы кіру
+          </button>
+
           <p className="mt-4 text-center text-sm">
             Аккаунтыңыз жоқ па?{" "}
             <span
