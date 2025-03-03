@@ -7,6 +7,7 @@ import img from "../assets/google.png";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
+  const { googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,9 +26,10 @@ const Login = () => {
     }
   };
 
-  // 🔹 Function to handle Google login redirect
-  const handleGoogleLogin = () => {
-    window.location.href = "http://127.0.0.1:8000/api/users/auth/google/login/";
+  const handleGoogleLogin = async () => {
+    window.location.href =
+      "http://localhost:8000/api/users/accounts/google/login/";
+    console.log("Google login redirecting...");
   };
 
   return (

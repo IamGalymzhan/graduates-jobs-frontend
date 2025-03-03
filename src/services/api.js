@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_URL =
-  process.env.REACT_APP_API_URL || "http://192.168.0.140:8000/api";
+const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000/api";
 
 export const registerStudent = async (formData) => {
   return await axios.post(`${API_URL}/users/register/`, {
@@ -19,6 +18,14 @@ export const registerEmployer = async (formData) => {
 
 export const loginUser = async (formData) => {
   return await axios.post(`${API_URL}/users/login/`, formData);
+};
+
+export const loginGoogleUser = async (token) => {
+  return await axios.get(`${API_URL}/users/googledata/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 const getAuthHeaders = () => {
@@ -53,6 +60,19 @@ export const updateProfile = async (formData) => {
     return response.data;
   } catch (error) {
     console.error("Error updating profile:", error.response?.data || error);
+    throw error;
+  }
+};
+
+export const updatedUser = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/users/googledata/`, {
+      headers: getAuthHeaders(),
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user:", error.response?.data || error);
     throw error;
   }
 };
@@ -302,4 +322,3 @@ export const fetchFacultyStats = async () => {
     throw error;
   }
 };
-

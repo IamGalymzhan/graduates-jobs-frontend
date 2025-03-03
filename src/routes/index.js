@@ -18,6 +18,8 @@ import JobDetails from "../pages/jobs/JobDetail";
 import AppliedJobsList from "../pages/dashboard/AppliedJobs";
 import EmployerApplications from "../pages/dashboard/ReceivedJobs";
 import ManageApplications from "../pages/admin/ManageApplications";
+import GoogleData from "../pages/Googledata";
+import ChooseType from "../pages/profile/ChooseType";
 
 const AppRoutes = () => {
   const { user } = useContext(AuthContext);
@@ -31,6 +33,7 @@ const AppRoutes = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register/student" element={<StudentRegister />} />
           <Route path="/register/employer" element={<EmployerRegister />} />
+          <Route path="/googledata" element={<GoogleData to="/" />} />
         </>
       )}
 
@@ -63,6 +66,7 @@ const AppRoutes = () => {
             <Route path="/jobs" element={<StudentDashboard />} />
           </>
         )}
+        {user?.user_type == null && <Route path="/" element={<ChooseType />} />}
       </Route>
 
       {/* Redirect unknown routes */}
