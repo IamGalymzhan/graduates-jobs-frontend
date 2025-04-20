@@ -67,6 +67,16 @@ const AppliedJobsList = () => {
               Өтінім берілген күн:{" "}
               {new Date(job.applied_at).toLocaleDateString()}
             </p>
+            {job.feedback && (
+              <div className="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <h4 className="text-md font-bold text-blue-800 mb-1">
+                  Жұмыс берушіден кері байланыс:
+                </h4>
+                <p className="text-sm text-gray-700 whitespace-pre-line">
+                  {job.feedback}
+                </p>
+              </div>
+            )}
             <a
               href={job.resume}
               className="block mt-3 bg-blue-600 text-white text-center px-4 py-2 rounded-lg hover:bg-blue-700 transition"

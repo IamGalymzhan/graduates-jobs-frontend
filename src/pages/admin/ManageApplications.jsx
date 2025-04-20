@@ -9,6 +9,7 @@ const ManageApplications = () => {
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("applied_at");
   const [selectedCoverLetter, setSelectedCoverLetter] = useState(null);
+  const [selectedFeedback, setSelectedFeedback] = useState(null);
 
   useEffect(() => {
     const getApplications = async () => {
@@ -76,6 +77,22 @@ const ManageApplications = () => {
             <p className="text-sm text-gray-500 mt-2">
               Өтінім күні: {new Date(app.applied_at).toLocaleDateString()}
             </p>
+            {app.feedback && (
+              <div className="mt-2 p-2 bg-blue-50 rounded-lg border border-blue-100">
+                <p className="text-sm font-semibold text-gray-700">
+                  Кері байланыс:
+                </p>
+                <p className="text-sm text-gray-600 truncate">{app.feedback}</p>
+                {app.feedback.length > 50 && (
+                  <button
+                    className="text-xs text-blue-600 hover:text-blue-800"
+                    onClick={() => setSelectedFeedback(app.feedback)}
+                  >
+                    Толығырақ көру
+                  </button>
+                )}
+              </div>
+            )}
             <div className="flex space-x-4 mt-3">
               <a
                 href={app.resume}
@@ -108,6 +125,25 @@ const ManageApplications = () => {
             <button
               className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
               onClick={() => setSelectedCoverLetter(null)}
+            >
+              Жабу
+            </button>
+          </div>
+        </Dialog>
+      )}
+
+      {selectedFeedback && (
+        <Dialog onClose={() => setSelectedFeedback(null)}>
+          <div className="p-6 bg-white shadow-xl rounded-lg max-w-lg mx-auto text-center">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Кері байланыс
+            </h3>
+            <p className="text-gray-700 text-lg whitespace-pre-line">
+              {selectedFeedback}
+            </p>
+            <button
+              className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+              onClick={() => setSelectedFeedback(null)}
             >
               Жабу
             </button>

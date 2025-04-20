@@ -322,3 +322,22 @@ export const fetchFacultyStats = async () => {
     throw error;
   }
 };
+
+export const updateJobApplication = async (applicationId, data) => {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/jobs/applications/${applicationId}/`,
+      data,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error updating job application:",
+      error.response?.data || error
+    );
+    throw error;
+  }
+};
